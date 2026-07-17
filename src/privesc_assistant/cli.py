@@ -33,7 +33,7 @@ def cmd_scan(args):
             
     is_root = False
     try:
-        is_root = os.getuid() == 0
+        is_root = os.getuid() == 0  # type: ignore
     except AttributeError:
         pass
     
@@ -59,7 +59,8 @@ def cmd_scan(args):
     output = reporter.render(findings, context)
     
     if args.output:
-        with open(args.output, "w") as f:
+        mode = "wb" if isinstance(output, bytes) else "w"
+        with open(args.output, mode) as f:
             f.write(output)
         print(f"Report saved to {args.output}")
     else:

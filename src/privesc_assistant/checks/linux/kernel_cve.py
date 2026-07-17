@@ -2,7 +2,7 @@ import os
 import json
 import subprocess
 import re
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 from privesc_assistant.checks.base import BaseCheck
 from privesc_assistant.core.finding import Finding, Severity
 from privesc_assistant.core.scan_context import ScanContext
@@ -36,7 +36,7 @@ def _parse_version(v_str: str) -> Tuple[int, ...]:
         return tuple(map(int, match.group(1).split('.')))
     return (0, 0, 0)
 
-def match_known_kernel_cves(current_version: str, db_path: str = None) -> List[Dict]:
+def match_known_kernel_cves(current_version: str, db_path: Optional[str] = None) -> List[Dict]:
     """Matches the current kernel version against the local CVE database."""
     if db_path is None:
         db_path = os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "data", "kernel_cve_db.json")

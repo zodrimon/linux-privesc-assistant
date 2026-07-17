@@ -123,7 +123,7 @@ def find_root_owned_user_writable_files(scope_paths: List[str]) -> List[str]:
     """Finds files owned by root but writable by the current user."""
     files = []
     # If the user is root, this check is less meaningful for privesc
-    if os.geteuid() == 0:
+    if hasattr(os, "geteuid") and os.geteuid() == 0:  # type: ignore
         return files
         
     for path, is_file in _walk_scopes(scope_paths):

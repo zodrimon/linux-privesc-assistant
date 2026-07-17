@@ -1,5 +1,5 @@
 import os
-import yaml
+import yaml  # type: ignore
 from copy import deepcopy
 from typing import Any
 from privesc_assistant.config.schema import validate_config

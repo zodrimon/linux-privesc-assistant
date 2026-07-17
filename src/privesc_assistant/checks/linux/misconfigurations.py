@@ -39,11 +39,11 @@ def check_docker_lxd_group_membership() -> List[str]:
         return dangerous_groups
         
     try:
-        user = pwd.getpwuid(os.getuid()).pw_name
-        groups = [g.gr_name for g in grp.getgrall() if user in g.gr_mem]
+        user = pwd.getpwuid(os.getuid()).pw_name  # type: ignore
+        groups = [g.gr_name for g in grp.getgrall() if user in g.gr_mem]  # type: ignore
         
         # Also include primary group
-        primary_group = grp.getgrgid(pwd.getpwuid(os.getuid()).pw_gid).gr_name
+        primary_group = grp.getgrgid(pwd.getpwuid(os.getuid()).pw_gid).gr_name  # type: ignore
         if primary_group not in groups:
             groups.append(primary_group)
             
