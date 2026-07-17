@@ -9,3 +9,6 @@ build/
 # Ignore project tracking files
 Tasks.md
 Context.md
+DECISIONS.md
+.gemini/
+.vscode/
