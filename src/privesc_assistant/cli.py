@@ -11,6 +11,7 @@ from privesc_assistant.reporting.terminal_reporter import TerminalReporter
 from privesc_assistant.reporting.json_reporter import JsonReporter
 from privesc_assistant.reporting.markdown_reporter import MarkdownReporter
 from privesc_assistant.reporting.html_reporter import HtmlReporter
+import privesc_assistant.checks.linux
 
 __version__ = "0.1.0"
 
