@@ -2,9 +2,15 @@ import argparse
 import logging
 import sys
 import datetime
+import os
 from privesc_assistant.core.scan_context import ScanContext
 from privesc_assistant.core.engine import ScanEngine
 from privesc_assistant.core.registry import get_registered_checks
+from privesc_assistant.config.loader import load_config
+from privesc_assistant.reporting.terminal_reporter import TerminalReporter
+from privesc_assistant.reporting.json_reporter import JsonReporter
+from privesc_assistant.reporting.markdown_reporter import MarkdownReporter
+from privesc_assistant.reporting.html_reporter import HtmlReporter
 
 __version__ = "0.1.0"
 
@@ -15,25 +21,48 @@ def setup_logging(verbose: bool):
 def cmd_scan(args):
     setup_logging(args.verbose)
     
-    # Minimal config for now, will be expanded in Phase 3
-    config = {}
+    config = load_config(args.config)
+    
     if args.checks:
         checks_list = args.checks.split(",")
-        config["checks"] = {c.strip(): True for c in checks_list}
+        if "checks" not in config:
+            config["checks"] = {}
+        for c in checks_list:
+            config["checks"][c.strip()] = True
+            
+    is_root = False
+    try:
+        is_root = os.getuid() == 0
+    except AttributeError:
+        pass
     
     context = ScanContext(
         target_os="linux",
-        hostname="localhost",
+        hostname=os.uname().nodename if hasattr(os, "uname") else "localhost",
         timestamp=datetime.datetime.now(),
         config=config,
-        is_root=False
+        is_root=is_root
     )
     
     engine = ScanEngine(config=config)
     findings = engine.run(context)
     
-    # Just printing 0 findings for Phase 2 skeleton. Formatters will be added in Phase 12.
-    print(f"{len(findings)} findings")
+    reporters = {
+        "terminal": TerminalReporter(),
+        "json": JsonReporter(),
+        "md": MarkdownReporter(),
+        "html": HtmlReporter()
+    }
+    
+    reporter = reporters.get(args.format, TerminalReporter())
+    output = reporter.render(findings, context)
+    
+    if args.output:
+        with open(args.output, "w") as f:
+            f.write(output)
+        print(f"Report saved to {args.output}")
+    else:
+        print(output)
 
 def cmd_list_checks(args):
     checks = get_registered_checks()
