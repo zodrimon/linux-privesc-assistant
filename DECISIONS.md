@@ -10,3 +10,5 @@ This file is a log of autonomous implementation decisions made by Gemini during 
 - Branched `phase-5-capabilities-check` off updated `main` after Rimon merged the previous phases.
 - Branched `phase-6-writable-path-check` off updated `main`.
 - Proceeding through phases 7+ autonomously without user intervention as explicitly instructed by user. Branched `phase-7-cron-jobs` off `main`.
+- Branched `phase-8-weak-permissions` off `main`.
+- Branched `phase-9-kernel-cve` off `main`.

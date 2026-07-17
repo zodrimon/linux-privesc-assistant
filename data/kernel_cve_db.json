@@ -1,0 +1,24 @@
+[
+    {
+        "cve": "CVE-2022-0847",
+        "name": "Dirty Pipe",
+        "affected_versions": "5.8 <= x < 5.16.11",
+        "exploit_link": "https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit",
+        "description": "A flaw was found in the way the flags member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel."
+    },
+    {
+        "cve": "CVE-2016-5195",
+        "name": "Dirty COW",
+        "affected_versions": "2.6.22 <= x < 4.8.3",
+        "exploit_link": "https://github.com/dirtycow/dirtycow.github.io/wiki/PoCs",
+        "description": "A race condition was found in the way the Linux kernel's memory subsystem handled the copy-on-write (COW) breakage of private read-only memory mappings."
+    },
+    {
+        "cve": "CVE-2021-4034",
+        "name": "PwnKit",
+        "affected_versions": "all",
+        "note": "This is a pkexec vulnerability, not kernel, but often bundled in kernel-like checks. Usually fixed in updated polkit packages.",
+        "exploit_link": "https://github.com/berdav/CVE-2021-4034",
+        "description": "A local privilege escalation vulnerability was found on polkit's pkexec utility."
+    }
+]
