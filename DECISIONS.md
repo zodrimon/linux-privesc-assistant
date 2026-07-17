@@ -6,3 +6,4 @@ This file is a log of autonomous implementation decisions made by Gemini during 
 - Branched `phase-2-cli-skeleton` off `phase-1-core-data-model` instead of `main` for the same reason.
 - Chose `argparse` over `click` for `cli.py` to minimize third-party dependencies and adhere strictly to the "stdlib-first" philosophy.
 - Branched `phase-3-config-system` off `phase-2-cli-skeleton` instead of `main` for the same reason.
+- Branched `phase-4-suid-sgid-check` off `phase-3-config-system` instead of `main` for the same reason.
