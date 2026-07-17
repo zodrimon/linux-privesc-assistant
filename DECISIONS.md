@@ -8,3 +8,4 @@ This file is a log of autonomous implementation decisions made by Gemini during 
 - Branched `phase-3-config-system` off `phase-2-cli-skeleton` instead of `main` for the same reason.
 - Branched `phase-4-suid-sgid-check` off `phase-3-config-system` instead of `main` for the same reason.
 - Branched `phase-5-capabilities-check` off updated `main` after Rimon merged the previous phases.
+- Branched `phase-6-writable-path-check` off updated `main`.
