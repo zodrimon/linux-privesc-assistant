@@ -13,3 +13,4 @@ This file is a log of autonomous implementation decisions made by Gemini during 
 - Branched `phase-8-weak-permissions` off `main`.
 - Branched `phase-9-kernel-cve` off `main`.
 - Branched `phase-10-misconfigurations` off `main`.
+- Branched `phase-11-risk-scoring` off `main`.
